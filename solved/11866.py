@@ -1,15 +1,29 @@
-import sys
+# import sys
 
-n, k = map(int, sys.stdin.readline().split())
+# n, k = map(int, sys.stdin.readline().split())
 
-idx = 0
-queue = [i for i in range(1, n + 1)]
+# idx = 0
+# queue = [i for i in range(1, n + 1)]
+# result = []
+# while queue:
+#     idx += k - 1  # k-1번째 인덱스까지 건너뛰기
+#     if idx >= len(queue):  # 인덱스가 범위를 넘어갈 경우
+#         idx %= len(queue)  # 나머지 연산을 통해 인덱스 계산
+#     result.append(str(queue.pop(idx)))  # k번째 수 제거 후 결과 배열에 추가
+
+# # 결과 출력
+# print(f"<{', '.join(result)}>")
+
+from collections import deque
+
+n, k = map(int, input().split())
+deq = deque([i for i in range(1, n + 1)])
 result = []
-while queue:
-    idx += k - 1  # k-1번째 인덱스까지 건너뛰기
-    if idx >= len(queue):  # 인덱스가 범위를 넘어갈 경우
-        idx %= len(queue)  # 나머지 연산을 통해 인덱스 계산
-    result.append(str(queue.pop(idx)))  # k번째 수 제거 후 결과 배열에 추가
 
-# 결과 출력
+while deq:
+    for i in range(k - 1):
+        deq.append(deq.popleft())
+        # print(deq)
+    result.append(str(deq.popleft()))
+    # print(result)
 print(f"<{', '.join(result)}>")
